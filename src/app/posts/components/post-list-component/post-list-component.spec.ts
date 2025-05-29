@@ -8,6 +8,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('PostListComponent', () => {
   let component: PostListComponent;
@@ -18,7 +21,7 @@ describe('PostListComponent', () => {
     const spy = jasmine.createSpyObj('ApiService', ['getPosts']);
 
     await TestBed.configureTestingModule({
-      declarations: [],
+      declarations: [PostListComponent],
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
@@ -26,6 +29,9 @@ describe('PostListComponent', () => {
         MatCardModule,
         MatProgressSpinnerModule,
         MatButtonModule,
+        MatTableModule,
+        MatPaginatorModule,
+        NoopAnimationsModule,
       ],
       providers: [{ provide: ApiService, useValue: spy }],
     }).compileComponents();
@@ -35,30 +41,29 @@ describe('PostListComponent', () => {
     apiServiceSpy = TestBed.inject(ApiService) as jasmine.SpyObj<ApiService>;
   });
 
-  it('should create', () => {
+  it('debería crearse correctamente', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should load posts correctly', () => {
-    const mockPosts = [{ id: 1, title: 'Post de prueba' }];
+  it('debería cargar posts correctamente', () => {
+    const mockPosts = [{ id: 1, title: 'Post 1' }];
     apiServiceSpy.getPosts.and.returnValue(of(mockPosts));
 
-    component.ngOnInit();
+    component.loadPosts();
 
-    expect(component.posts.length).toBe(1);
-    expect(component.error).toBeNull();
     expect(component.isLoading).toBeFalse();
+    expect(component.error).toBeNull();
+    expect(component.dataSource.data.length).toBe(1);
   });
 
-  it('should handle error loading posts', () => {
+  it('debería manejar error al cargar posts', () => {
     apiServiceSpy.getPosts.and.returnValue(
-      throwError(() => new Error('Error al cargar'))
+      throwError(() => new Error('fallo'))
     );
 
-    component.ngOnInit();
+    component.loadPosts();
 
-    expect(component.posts.length).toBe(0);
-    expect(component.error).toBe('Error al cargar los posts');
     expect(component.isLoading).toBeFalse();
+    expect(component.error).toBe('Error al cargar los posts');
   });
 });
