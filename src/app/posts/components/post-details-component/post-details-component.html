@@ -1,0 +1,18 @@
+<div class="center" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="error" class="center">
+    <p>{{ error }}</p>
+    <button mat-raised-button color="warn" (click)="retry()">Reintentar</button>
+</div>
+<mat-toolbar color="primary">Posts Detalle</mat-toolbar>
+<mat-card *ngIf="!isLoading && !error && post">
+    <mat-card-title>{{ post.title }}</mat-card-title>
+    <mat-card-content>
+        <p>{{ post.body }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button color="primary" routerLink="/">Volver a la lista</button>
+    </mat-card-actions>
+</mat-card>

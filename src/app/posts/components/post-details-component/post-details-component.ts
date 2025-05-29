@@ -14,6 +14,10 @@ export class PostDetailsComponent {
   error: string | null = null;
   constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
+  ngOnInit(): void {
+    this.loadPost();
+  }
+
   loadPost(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
     const id = idParam ? Number(idParam) : null;
