@@ -1,59 +1,86 @@
-# PruebaAngular
+# PruebaFront
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
+Proyecto técnico en Angular que consume y presenta publicaciones desde una API REST.
 
-## Development server
+---
 
-To start a local development server, run:
+##  Estructura del proyecto
 
-```bash
-ng serve
+```
+src/
+├── app/
+│   ├── posts/
+│   │   ├── components/
+│   │   │   ├── post-list-component/
+│   │   │   └── post-details-component/
+│   │   ├── services/
+│   │   └── posts.module.ts
+│   ├── app-routing.module.ts
+│   └── app.module.ts
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+* **posts/components**: Componentes relacionados a publicaciones.
+* **posts/services**: Lógica de comunicación con la API (`api.service.ts`).
+* **Modularización**: Cada conjunto funcional tiene su propio módulo.
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+##  Cómo ejecutar el proyecto
 
 ```bash
-ng generate --help
+npm install
+npm start
 ```
 
-## Building
+La app se ejecutará en `http://localhost:4200`
 
-To build the project run:
+---
 
-```bash
-ng build
+##  Funcionalidades implementadas
+
+* Visualización de publicaciones (`PostListComponent`).
+* Detalle individual de publicación (`PostDetailComponent`).
+* Mensajes de carga y error.
+* Estilo con Angular Material.
+
+---
+
+##  Pruebas unitarias
+
+* Se utilizaron Jasmine y Karma.
+* Se realizaron pruebas en `post-list` y `post-details`.
+
+### Cobertura actual:
+
+```
+Statements : 88.09%
+Branches   : 80%
+Functions  : 73.33%
+Lines      : 87.5%
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+##  Estado global (manejo de errores y loading)
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Cada componente maneja:
 
-```bash
-ng test
-```
+* Estado `isLoading` para control de spinners.
+* Estado `error` para manejo de errores.
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+##  Decisiones técnicas
 
-```bash
-ng e2e
-```
+* Angular CLI con estructura modular para escalabilidad.
+* Servicios centralizados para facilitar el testing y desacoplar lógica.
+* Angular Material para una interfaz consistente.
+* Cobertura de pruebas superior al 80% para garantizar mantenibilidad.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## 📈 Mejoras futuras
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+* Implementar store (NgRx) para manejo de estado global.
+* Test de integración completa usando Cypress.
+* Mejora visual con temas personalizados.
