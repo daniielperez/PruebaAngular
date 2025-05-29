@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { PostDetailsComponent } from './components/post-details-component/post-details-component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [PostListComponent, PostDetailsComponent],
@@ -19,6 +21,8 @@ import { PostDetailsComponent } from './components/post-details-component/post-d
     MatButtonModule,
     MatCardModule,
     MatToolbarModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
 })
 export class PostsModule {}
