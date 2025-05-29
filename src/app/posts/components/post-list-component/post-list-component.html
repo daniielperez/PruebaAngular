@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">Lista de Posts</mat-toolbar>
+
+<div *ngIf="isLoading" class="center">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="error" class="center">
+  <p>{{ error }}</p>
+  <button mat-raised-button color="warn" (click)="retry()">Reintentar</button>
+</div>
+
+<div class="posts-container" *ngIf="!isLoading && !error">
+  <mat-card *ngFor="let post of posts" class="post-card">
+    <mat-card-title>
+      <a [routerLink]="['/details', post.id]">{{ post.title }}</a>
+    </mat-card-title>
+  </mat-card>
+</div>
